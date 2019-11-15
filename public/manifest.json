@@ -1,0 +1,9 @@
+{
+  "name": "Argon Wallet",
+  "short_name": "Argon",
+  "start_url": "/",
+  "background_color": "#663399",
+  "theme_color": "#663399",
+  "display": "minimal-ui",
+  "icon": "/bis-logo.png"
+}
