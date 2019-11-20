@@ -11,10 +11,16 @@ const Balance = () => {
   const [balance, setBalance] = React.useState(null);
   const [isValid, setIsValid] = React.useState(false);
 
-  const [websocket, socketState] = useWebSocket(WEBSOCKET_URL, msg => {
-    console.log(JSON.parse(msg.data));
-    setBalance(JSON.parse(msg.data).balance);
-  });
+  const [websocket, socketState] = useWebSocket(WEBSOCKET_URL);
+
+  React.useEffect(() => {
+    if (websocket) {
+      websocket.onmessage = msg => {
+        console.log(JSON.parse(msg.data));
+        setBalance(JSON.parse(msg.data).balance);
+      };
+    }
+  }, [websocket]);
 
   React.useEffect(() => {
     if (websocket && address && address.match(/[0-9a-f]{56}/)) {

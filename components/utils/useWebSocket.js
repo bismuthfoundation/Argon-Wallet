@@ -1,9 +1,15 @@
+/**
+ * This is a function (hook to be precise) which
+ * helps us make a connection to the WS server and
+ * returns the websocket and its connection state.
+ */
+
 import React from 'react';
 import { states as socketStates } from '../SocketStatus';
 
 const TIMEOUT = 250;
 
-const useWebSocket = (socketUrl, cb) => {
+const useWebSocket = socketUrl => {
   const [ws, setWs] = React.useState(null);
   const [cStatus, setCStatus] = React.useState(socketStates.OFFLINE);
   const connect = () => {
@@ -39,8 +45,6 @@ const useWebSocket = (socketUrl, cb) => {
       setCStatus(socketStates.OFFLINE);
       _ws.close();
     };
-
-    _ws.onmessage = cb;
   };
 
   const check = () => {
